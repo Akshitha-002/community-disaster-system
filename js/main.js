@@ -112,4 +112,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // If the page was opened with a hash like preparedness.html#flood
+  // (e.g. from a hazard card on the home page), automatically open
+  // that section instead of leaving the visitor to find and click it.
+  if (window.location.hash) {
+    var targetItem = document.querySelector(window.location.hash);
+    if (targetItem && targetItem.classList.contains("accordion-item")) {
+      var targetContent = targetItem.querySelector(".accordion-content");
+      if (targetContent) {
+        targetItem.classList.add("open");
+        targetContent.style.maxHeight = targetContent.scrollHeight + "px";
+        targetItem.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }
+
 });

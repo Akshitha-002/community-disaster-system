@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Our own stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -63,18 +63,18 @@
       <p>Get emergency alerts, learn how to prepare, find important contacts and resources, and help your community stay safe.</p>
 
       <div class="hero-actions">
-        <a href="alerts.html" class="btn btn-primary" style="background-color:#fff; color:var(--color-primary);">View Emergency Alerts</a>
+        <a href="alerts.html" class="btn btn-cta">View Emergency Alerts</a>
         <a href="preparedness.html" class="btn btn-outline">Learn How to Prepare</a>
       </div>
 
-      <!-- Row of disaster-type icons -->
+      <!-- Disaster-type quick cards - clickable, each jumps to its guide -->
       <div class="hazard-icons">
-        <div class="hazard-icon"><i class="fa-solid fa-water"></i>Flood</div>
-        <div class="hazard-icon"><i class="fa-solid fa-fire"></i>Fire</div>
-        <div class="hazard-icon"><i class="fa-solid fa-house-crack"></i>Earthquake</div>
-        <div class="hazard-icon"><i class="fa-solid fa-wind"></i>Cyclone</div>
-        <div class="hazard-icon"><i class="fa-solid fa-mountain"></i>Landslide</div>
-        <div class="hazard-icon"><i class="fa-solid fa-truck-medical"></i>Medical Emergency</div>
+        <a href="preparedness.html#flood" class="hazard-card"><i class="fa-solid fa-water"></i><span>Flood</span></a>
+        <a href="preparedness.html#fire" class="hazard-card"><i class="fa-solid fa-fire"></i><span>Fire</span></a>
+        <a href="preparedness.html#earthquake" class="hazard-card"><i class="fa-solid fa-house-crack"></i><span>Earthquake</span></a>
+        <a href="preparedness.html#cyclone" class="hazard-card"><i class="fa-solid fa-wind"></i><span>Cyclone</span></a>
+        <a href="preparedness.html#landslide" class="hazard-card"><i class="fa-solid fa-mountain"></i><span>Landslide</span></a>
+        <a href="contacts.html" class="hazard-card"><i class="fa-solid fa-truck-medical"></i><span>Medical Emergency</span></a>
       </div>
     </div>
   </section>
@@ -85,29 +85,39 @@
   ====================================================== -->
   <section class="section">
     <div class="container">
-      <h2>Emergency Status</h2>
-      <p class="section-intro">Everything you need in one place — jump straight to what matters right now.</p>
+      <div class="flex-between" style="align-items: flex-start; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-5);">
+        <div>
+          <h2 style="margin-bottom: var(--space-2);">Emergency Status</h2>
+          <p class="section-intro" style="margin-bottom: 0;">Everything you need in one place — jump straight to what matters right now.</p>
+        </div>
+
+        <!-- Live status badge - reflects the sample alert data on the Alerts page -->
+        <a href="alerts.html" class="status-indicator status-indicator--warning">
+          <span class="status-dot"></span>
+          Active Warning: Flood &amp; Fire Alerts in Effect
+        </a>
+      </div>
 
       <div class="grid grid-4">
-        <div class="card status-card">
+        <div class="card status-card accent-red">
           <h3><i class="fa-solid fa-triangle-exclamation"></i>Current Alerts</h3>
           <p>See active alerts for your area, filtered by disaster type and severity.</p>
           <a href="alerts.html" class="btn btn-outline">View Alerts</a>
         </div>
 
-        <div class="card status-card">
+        <div class="card status-card accent-blue">
           <h3><i class="fa-solid fa-phone"></i>Emergency Contacts</h3>
           <p>Police, fire, ambulance, and helpline numbers, ready to call in one tap.</p>
           <a href="contacts.html" class="btn btn-outline">View Contacts</a>
         </div>
 
-        <div class="card status-card">
+        <div class="card status-card accent-amber">
           <h3><i class="fa-solid fa-book"></i>Safety Guides</h3>
           <p>What to do before, during, and after a disaster, plus an emergency kit checklist.</p>
           <a href="safety-guides.html" class="btn btn-outline">View Guides</a>
         </div>
 
-        <div class="card status-card">
+        <div class="card status-card accent-green">
           <h3><i class="fa-solid fa-map-location-dot"></i>Emergency Resources</h3>
           <p>Find nearby hospitals, shelters, police stations, and relief centers on a map.</p>
           <a href="resources.html" class="btn btn-outline">View Resources</a>
@@ -148,6 +158,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

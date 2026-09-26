@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -41,94 +41,120 @@
     </div>
   </header>
 
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-top">
+        <div>
+          <h2>Disaster Preparedness</h2>
+          <p>Click a disaster type to expand its preparedness checklist. Knowing what to do before disaster strikes is the single best way to stay safe.</p>
+        </div>
+        <div class="hotline-ribbon">
+          <i class="fa-solid fa-phone"></i> Emergency Hotline: <a href="tel:112">112</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
-      <h2>Disaster Preparedness</h2>
-      <p class="section-intro">Click a disaster type to expand its preparedness checklist. Knowing what to do before disaster strikes is the single best way to stay safe.</p>
-
       <div id="accordionContainer">
 
         <!-- FLOOD -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="flood" style="--accent: var(--accent-flood);">
           <div class="accordion-header">
-            <span><i class="fa-solid fa-water" style="color:var(--color-primary); margin-right:8px;"></i>Flood Preparedness</span>
+            <span class="accordion-header-label">
+              <span class="icon-badge"><i class="fa-solid fa-water"></i></span>
+              Flood Preparedness
+            </span>
             <i class="fa-solid fa-chevron-down chevron"></i>
           </div>
           <div class="accordion-content">
-            <ul>
-              <li>Move to higher ground</li>
-              <li>Keep emergency supplies ready</li>
-              <li>Avoid walking or driving through floodwater</li>
-              <li>Switch off electricity if instructed</li>
-              <li>Follow official emergency alerts</li>
-            </ul>
+            <div class="tip-grid">
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Move to higher ground</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Keep emergency supplies ready</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Avoid walking or driving through floodwater</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Switch off electricity if instructed</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Follow official emergency alerts</span></div>
+            </div>
           </div>
         </div>
 
         <!-- EARTHQUAKE -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="earthquake" style="--accent: var(--accent-earthquake);">
           <div class="accordion-header">
-            <span><i class="fa-solid fa-house-crack" style="color:var(--color-primary); margin-right:8px;"></i>Earthquake Preparedness</span>
+            <span class="accordion-header-label">
+              <span class="icon-badge"><i class="fa-solid fa-house-crack"></i></span>
+              Earthquake Preparedness
+            </span>
             <i class="fa-solid fa-chevron-down chevron"></i>
           </div>
           <div class="accordion-content">
-            <ul>
-              <li>Drop, Cover, and Hold On</li>
-              <li>Stay away from windows</li>
-              <li>Do not use elevators</li>
-              <li>Keep an emergency kit</li>
-              <li>Identify safe places in your home</li>
-            </ul>
+            <div class="tip-grid">
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Drop, Cover, and Hold On</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Stay away from windows</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Do not use elevators</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Keep an emergency kit</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Identify safe places in your home</span></div>
+            </div>
           </div>
         </div>
 
         <!-- FIRE -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="fire" style="--accent: var(--accent-fire);">
           <div class="accordion-header">
-            <span><i class="fa-solid fa-fire" style="color:var(--color-primary); margin-right:8px;"></i>Fire Preparedness</span>
+            <span class="accordion-header-label">
+              <span class="icon-badge"><i class="fa-solid fa-fire"></i></span>
+              Fire Preparedness
+            </span>
             <i class="fa-solid fa-chevron-down chevron"></i>
           </div>
           <div class="accordion-content">
-            <ul>
-              <li>Know emergency exits</li>
-              <li>Keep fire extinguishers ready</li>
-              <li>Do not use elevators during a fire</li>
-              <li>Stay low in smoke</li>
-              <li>Call emergency services</li>
-            </ul>
+            <div class="tip-grid">
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Know emergency exits</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Keep fire extinguishers ready</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Do not use elevators during a fire</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Stay low in smoke</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Call emergency services</span></div>
+            </div>
           </div>
         </div>
 
         <!-- CYCLONE / SEVERE WEATHER -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="cyclone" style="--accent: var(--accent-cyclone);">
           <div class="accordion-header">
-            <span><i class="fa-solid fa-wind" style="color:var(--color-primary); margin-right:8px;"></i>Cyclone / Severe Weather Preparedness</span>
+            <span class="accordion-header-label">
+              <span class="icon-badge"><i class="fa-solid fa-wind"></i></span>
+              Cyclone / Severe Weather Preparedness
+            </span>
             <i class="fa-solid fa-chevron-down chevron"></i>
           </div>
           <div class="accordion-content">
-            <ul>
-              <li>Stay indoors</li>
-              <li>Secure doors and windows</li>
-              <li>Keep food, water, and medicines ready</li>
-              <li>Charge phones and power banks</li>
-              <li>Follow weather warnings</li>
-            </ul>
+            <div class="tip-grid">
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Stay indoors</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Secure doors and windows</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Keep food, water, and medicines ready</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Charge phones and power banks</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Follow weather warnings</span></div>
+            </div>
           </div>
         </div>
 
         <!-- LANDSLIDE -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="landslide" style="--accent: var(--accent-landslide);">
           <div class="accordion-header">
-            <span><i class="fa-solid fa-mountain" style="color:var(--color-primary); margin-right:8px;"></i>Landslide Preparedness</span>
+            <span class="accordion-header-label">
+              <span class="icon-badge"><i class="fa-solid fa-mountain"></i></span>
+              Landslide Preparedness
+            </span>
             <i class="fa-solid fa-chevron-down chevron"></i>
           </div>
           <div class="accordion-content">
-            <ul>
-              <li>Avoid dangerous slopes during heavy rainfall</li>
-              <li>Stay alert for unusual sounds</li>
-              <li>Move away from affected areas</li>
-              <li>Follow evacuation instructions</li>
-            </ul>
+            <div class="tip-grid">
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Avoid dangerous slopes during heavy rainfall</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Stay alert for unusual sounds</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Move away from affected areas</span></div>
+              <div class="tip-tile"><i class="fa-solid fa-check"></i><span>Follow evacuation instructions</span></div>
+            </div>
           </div>
         </div>
 
@@ -156,6 +182,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

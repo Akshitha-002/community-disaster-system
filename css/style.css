@@ -50,6 +50,12 @@
   --color-severity-high: #d94e1f;     /* orange-red */
   --color-severity-critical: #8b0000; /* dark red */
 
+  /* --- Call-to-action color (deliberately distinct from the severity
+     scale above, so "click this" and "this means high danger" never
+     look like the same signal) --- */
+  --color-cta: #d35400;
+  --color-cta-dark: #a84000;
+
   /* --- Typography --- */
   --font-heading: "Archivo", "Segoe UI", Arial, sans-serif;
   --font-body: "Inter", "Segoe UI", Arial, sans-serif;
@@ -66,7 +72,17 @@
   /* --- Radius & shadow (kept subtle - this is a utility site, not a showcase) --- */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --shadow-card: 0 1px 3px rgba(16, 21, 31, 0.08);
+  --radius-lg: 12px;
+  --shadow-card: 0 4px 6px -1px rgba(16, 21, 31, 0.1);
+
+  /* --- Disaster-category accent colors, used on the Preparedness page
+     (left border, icon badge, tip-tile tint) so each hazard type is
+     visually distinct and quick to scan --- */
+  --accent-flood: #0077b6;
+  --accent-earthquake: #d97706;
+  --accent-fire: #dc2626;
+  --accent-cyclone: #4f46e5;
+  --accent-landslide: #92400e;
 
   /* --- Layout --- */
   --max-width: 1180px;
@@ -368,6 +384,18 @@ p {
 }
 .btn-call:hover { filter: brightness(0.9); }
 
+/* Primary call-to-action - deliberately brighter/higher-contrast than
+   the other button styles, so the single most important action on a
+   page (e.g. "View Emergency Alerts") is unmistakable at a glance. */
+.btn-cta {
+  background-color: var(--color-cta);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(211, 84, 0, 0.35);
+}
+.btn-cta:hover {
+  background-color: var(--color-cta-dark);
+}
+
 
 /* ---------------------------------------------------------------------
    7. HERO SECTION (Home page)
@@ -405,26 +433,98 @@ p {
   color: var(--color-primary);
 }
 
-/* Row of small disaster-type icons under the hero */
+/* Disaster-type quick cards under the hero - larger, clickable,
+   with a hover "lift" effect so they read as interactive. */
 .hazard-icons {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-4);
+  gap: var(--space-3);
   margin-top: var(--space-5);
 }
 
-.hazard-icon {
+.hazard-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-1);
+  justify-content: center;
+  gap: var(--space-2);
+  width: 128px;
+  padding: var(--space-4) var(--space-2);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-md);
+  color: #fff;
+  text-decoration: none;
   font-size: 0.85rem;
-  color: #dbe4ee;
+  font-weight: 500;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
-.hazard-icon i {
-  font-size: 1.5rem;
+.hazard-card i {
+  font-size: 1.75rem;
   color: #fff;
+}
+
+.hazard-card:hover,
+.hazard-card:focus-visible {
+  background-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+
+/* Live status badge - gives an at-a-glance answer to "is anything
+   wrong right now?" without needing to click into the Alerts page. */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.status-indicator--warning {
+  background-color: #fdecea;
+  color: var(--color-severity-critical);
+}
+
+.status-indicator--clear {
+  background-color: #e6f4ea;
+  color: var(--color-severity-low);
+}
+
+.status-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: currentColor;
+  flex-shrink: 0;
+}
+
+/* The pulsing "ring" is a second copy of the dot that expands and
+   fades - a common pattern for "this is live/active" indicators.
+   (Automatically disabled for anyone with reduced-motion set, via
+   the global rule in section 2.) */
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.45;
+  animation: status-pulse 1.6s ease-out infinite;
+}
+
+@keyframes status-pulse {
+  0% { transform: scale(0.6); opacity: 0.5; }
+  70% { transform: scale(2); opacity: 0; }
+  100% { opacity: 0; }
 }
 
 
@@ -434,7 +534,7 @@ p {
 .card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--space-4);
   box-shadow: var(--shadow-card);
 }
@@ -449,10 +549,26 @@ p {
   color: var(--color-primary);
 }
 
-/* Emergency Status cards on the home page */
+/* Emergency Status cards on the home page - a colored accent bar
+   across the top of each card makes the four options easy to tell
+   apart at a glance, and a hover "lift" reinforces that they're
+   clickable shortcuts. */
 .status-card {
   text-align: left;
+  position: relative;
+  border-top: 4px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.status-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(16, 21, 31, 0.12);
+}
+
+.status-card.accent-red { border-top-color: var(--color-sos); }
+.status-card.accent-blue { border-top-color: var(--color-primary); }
+.status-card.accent-amber { border-top-color: var(--color-severity-medium); }
+.status-card.accent-green { border-top-color: var(--color-severity-low); }
 
 .status-card .btn {
   margin-top: var(--space-3);
@@ -504,6 +620,60 @@ p {
 
 
 /* ---------------------------------------------------------------------
+   8b. PAGE HERO BAND
+   A smaller gradient banner used at the top of every inner page (all
+   pages except the home page, which has its own full hero). Gives
+   every page the same grounded, "this is a serious tool" opening
+   instead of a plain heading straight on the grey background.
+--------------------------------------------------------------------- */
+.page-hero {
+  background: linear-gradient(135deg, var(--color-ink) 0%, var(--color-primary) 100%);
+  color: #fff;
+  padding: var(--space-6) 0;
+}
+
+.page-hero h2 {
+  color: #fff;
+  font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+  margin-bottom: var(--space-2);
+}
+
+.page-hero p {
+  color: #dbe4ee;
+  max-width: 65ch;
+  margin: 0;
+}
+
+.page-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Small hotline ribbon that can sit inside a page-hero, e.g.
+   "Emergency Hotline: 112" - a constant, reassuring quick-reference. */
+.hotline-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.hotline-ribbon a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+
+/* ---------------------------------------------------------------------
    9. SEVERITY BADGES
    Used on alert cards and in the report form/admin panel.
 --------------------------------------------------------------------- */
@@ -530,13 +700,30 @@ p {
 
 /* ---------------------------------------------------------------------
    10. ACCORDION (Disaster Preparedness page)
+   Each accordion-item carries its category color as a CSS custom
+   property (--accent, set inline in the HTML, e.g. style="--accent:
+   var(--accent-flood)"). Every themed element below - the left
+   border, icon badge, active-state tint, and tip checkmarks - reads
+   from that one variable, so adding a new category never means
+   writing new CSS rules, just setting --accent on the item.
 --------------------------------------------------------------------- */
 .accordion-item {
+  --accent: var(--color-primary); /* fallback if an item doesn't set one */
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
   margin-bottom: var(--space-3);
   background-color: var(--color-surface);
   overflow: hidden;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+/* Active-state highlight: thicker accent border + a light tint of
+   that same color, so it's obvious at a glance which section is open. */
+.accordion-item.open {
+  border-left-width: 8px;
+  background-color: color-mix(in srgb, var(--accent) 6%, white);
+  box-shadow: var(--shadow-card);
 }
 
 .accordion-header {
@@ -549,8 +736,29 @@ p {
   font-weight: 700;
 }
 
+.accordion-header-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Rounded icon badge, tinted with the category's accent color */
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--accent) 15%, white);
+  color: var(--accent);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
 .accordion-header i.chevron {
   transition: transform 0.15s ease;
+  color: var(--color-muted);
 }
 
 /* When JS adds the "open" class, rotate the chevron and reveal the content */
@@ -570,14 +778,35 @@ p {
   /* max-height is set inline by JS to the content's real height */
 }
 
-.accordion-content ul {
-  padding-left: var(--space-4);
+/* 2-column grid of tip tiles, replacing a plain bulleted list -
+   easier to scan, and each tile reads as a small completed step. */
+.tip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
 }
 
-.accordion-content li {
-  list-style: disc;
-  margin-bottom: var(--space-2);
+.tip-tile {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background-color: color-mix(in srgb, var(--accent) 8%, white);
+  border-radius: var(--radius-sm);
   color: var(--color-ink);
+  font-size: 0.95rem;
+}
+
+.tip-tile i {
+  color: var(--accent);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .tip-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 

@@ -12,7 +12,7 @@
   <!-- Leaflet CSS (map library) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=4">
 
   <style>
     /* Page-specific: the map needs an explicit height, which is easiest to
@@ -57,11 +57,18 @@
     </div>
   </header>
 
+  <section class="page-hero">
+    <div class="container page-hero-top">
+      <div>
+        <h2>Emergency Resources</h2>
+        <p>Find nearby hospitals, police stations, fire stations, shelters, and relief centers. Sample locations are shown for demonstration — real location data can be added later.</p>
+      </div>
+      <div class="hotline-ribbon"><i class="fa-solid fa-phone"></i> Emergency Hotline: <a href="tel:112">112</a></div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
-      <h2>Emergency Resources</h2>
-      <p class="section-intro">Find nearby hospitals, police stations, fire stations, shelters, and relief centers. Sample locations are shown for demonstration — real location data can be added later.</p>
-
       <!-- Category filters -->
       <div class="hero-actions" id="resourceFilters" style="margin-bottom: var(--space-3);">
         <button class="btn btn-outline" data-category="all">All</button>
@@ -110,7 +117,7 @@
 
   <!-- Leaflet JS (map library) -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=4"></script>
   <script src="js/resources.js?v=3"></script>
 </body>
 </html>
