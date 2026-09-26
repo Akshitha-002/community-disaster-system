@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safety Guides | Community Disaster Preparedness System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand" aria-label="Disaster Prep Home">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span class="navbar-brand-text">Disaster Prep</span>
+      </a>
+      <nav class="navbar-links" id="navbarLinks">
+        <a href="index.html">Home</a>
+        <a href="alerts.html">Emergency Alerts</a>
+        <a href="preparedness.html">Disaster Preparedness</a>
+        <a href="contacts.html">Emergency Contacts</a>
+        <a href="resources.html">Emergency Resources</a>
+        <a href="report.html">Report Emergency</a>
+        <a href="safety-guides.html" class="active">Safety Guides</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="sos-btn" id="sosBtn">
+          <span class="sos-full">SOS / Emergency</span>
+          <span class="sos-short">SOS</span>
+        </button>
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>Safety Guides</h2>
+      <p class="section-intro">General guidance for what to do before, during, and after a disaster.</p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h3><i class="fa-solid fa-list-check"></i>Before a Disaster</h3>
+          <ul style="padding-left: var(--space-4); color: var(--color-muted);">
+            <li style="list-style:disc; margin-bottom:8px;">Prepare an emergency kit</li>
+            <li style="list-style:disc; margin-bottom:8px;">Know your evacuation routes</li>
+            <li style="list-style:disc; margin-bottom:8px;">Save emergency numbers</li>
+            <li style="list-style:disc;">Stay informed on local alerts</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><i class="fa-solid fa-triangle-exclamation"></i>During a Disaster</h3>
+          <ul style="padding-left: var(--space-4); color: var(--color-muted);">
+            <li style="list-style:disc; margin-bottom:8px;">Stay calm and follow instructions</li>
+            <li style="list-style:disc; margin-bottom:8px;">Move to safety immediately</li>
+            <li style="list-style:disc; margin-bottom:8px;">Avoid damaged structures and floodwater</li>
+            <li style="list-style:disc;">Help others if it's safe to do so</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><i class="fa-solid fa-house-medical"></i>After a Disaster</h3>
+          <ul style="padding-left: var(--space-4); color: var(--color-muted);">
+            <li style="list-style:disc; margin-bottom:8px;">Check for injuries and get medical help</li>
+            <li style="list-style:disc; margin-bottom:8px;">Avoid re-entering damaged buildings</li>
+            <li style="list-style:disc; margin-bottom:8px;">Document damage for records</li>
+            <li style="list-style:disc;">Follow official recovery guidance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY KIT CHECKLIST -->
+  <section class="section section-alt">
+    <div class="container" style="max-width: 640px;">
+      <h2>Emergency Kit Checklist</h2>
+      <p class="section-intro">Check off items as you gather them. Your progress is saved automatically on this device.</p>
+
+      <p id="kitProgressLabel" style="font-weight:600; color:var(--color-ink);">Your Emergency Kit: 0/11 Items Ready</p>
+      <div class="progress-track">
+        <div class="progress-fill" id="kitProgressFill" style="width: 0%;"></div>
+      </div>
+
+      <div class="checklist" id="kitChecklist">
+        <label class="checklist-item"><input type="checkbox" data-item="water"> Drinking water</label>
+        <label class="checklist-item"><input type="checkbox" data-item="food"> Non-perishable food</label>
+        <label class="checklist-item"><input type="checkbox" data-item="firstaid"> First-aid kit</label>
+        <label class="checklist-item"><input type="checkbox" data-item="flashlight"> Flashlight</label>
+        <label class="checklist-item"><input type="checkbox" data-item="batteries"> Extra batteries</label>
+        <label class="checklist-item"><input type="checkbox" data-item="powerbank"> Power bank</label>
+        <label class="checklist-item"><input type="checkbox" data-item="medicines"> Essential medicines</label>
+        <label class="checklist-item"><input type="checkbox" data-item="documents"> Important documents</label>
+        <label class="checklist-item"><input type="checkbox" data-item="contactinfo"> Emergency contact information</label>
+        <label class="checklist-item"><input type="checkbox" data-item="whistle"> Whistle</label>
+        <label class="checklist-item"><input type="checkbox" data-item="clothing"> Basic clothing</label>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p style="color:#b7c0cc; max-width:none;">&copy; 2026 Community Disaster Preparedness and Emergency Information System. Student project — does not replace official emergency services.</p>
+      <p style="color:#b7c0cc; max-width:none;">In a real emergency, always call <strong>112</strong>.</p>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="sosModal">
+    <div class="modal-box">
+      <h2><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h2>
+      <p>This is a student project demo and does <strong>not</strong> automatically contact emergency services. Please use the numbers below to get real help.</p>
+      <div class="modal-actions">
+        <a href="tel:112" class="btn btn-danger btn-block">Call 112 (National Emergency Number)</a>
+        <a href="tel:108" class="btn btn-danger btn-block">Call 108 (Ambulance)</a>
+        <a href="contacts.html" class="btn btn-outline btn-block">View All Emergency Contacts</a>
+      </div>
+      <button class="modal-close" id="sosModalClose">Close</button>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2"></script>
+  <script src="js/safety.js?v=2"></script>
+</body>
+</html>

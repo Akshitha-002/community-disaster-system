@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Contacts | Community Disaster Preparedness System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand" aria-label="Disaster Prep Home">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span class="navbar-brand-text">Disaster Prep</span>
+      </a>
+      <nav class="navbar-links" id="navbarLinks">
+        <a href="index.html">Home</a>
+        <a href="alerts.html">Emergency Alerts</a>
+        <a href="preparedness.html">Disaster Preparedness</a>
+        <a href="contacts.html" class="active">Emergency Contacts</a>
+        <a href="resources.html">Emergency Resources</a>
+        <a href="report.html">Report Emergency</a>
+        <a href="safety-guides.html">Safety Guides</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="sos-btn" id="sosBtn">
+          <span class="sos-full">SOS / Emergency</span>
+          <span class="sos-short">SOS</span>
+        </button>
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>Emergency Contacts</h2>
+      <p class="section-intro">Official emergency numbers for India. Tap "Call Now" on a phone to dial directly.</p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h3><i class="fa-solid fa-phone-volume"></i>National Emergency Number</h3>
+          <p style="font-size:1.5rem; font-weight:700; color:var(--color-ink);">112</p>
+          <a href="tel:112" class="btn btn-call btn-block">Call Now</a>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-user-shield"></i>Police</h3>
+          <p style="font-size:1.5rem; font-weight:700; color:var(--color-ink);">100</p>
+          <a href="tel:100" class="btn btn-call btn-block">Call Now</a>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-fire-extinguisher"></i>Fire and Rescue</h3>
+          <p style="font-size:1.5rem; font-weight:700; color:var(--color-ink);">101</p>
+          <a href="tel:101" class="btn btn-call btn-block">Call Now</a>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-truck-medical"></i>Ambulance</h3>
+          <p style="font-size:1.5rem; font-weight:700; color:var(--color-ink);">108</p>
+          <a href="tel:108" class="btn btn-call btn-block">Call Now</a>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-house-flag"></i>Disaster Management Helpline</h3>
+          <p style="color:var(--color-muted);">Contact your local district disaster management authority for area-specific help.</p>
+        </div>
+
+        <div class="card">
+          <h3><i class="fa-solid fa-person-dress"></i>Women Helpline</h3>
+          <p style="font-size:1.5rem; font-weight:700; color:var(--color-ink);">1091</p>
+          <a href="tel:1091" class="btn btn-call btn-block">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY EMERGENCY CONTACTS -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Community Emergency Contacts</h2>
+      <p class="section-intro">Add contacts specific to your building, street, or community group (neighborhood watch lead, building security, local doctor, etc.). These are saved on this device only.</p>
+
+      <div class="grid grid-2">
+        <!-- Add contact form -->
+        <div class="card">
+          <h3><i class="fa-solid fa-user-plus"></i>Add a Contact</h3>
+          <form id="communityContactForm">
+            <div class="form-group">
+              <label for="contactName">Name</label>
+              <input type="text" id="contactName" required>
+            </div>
+            <div class="form-group">
+              <label for="contactRole">Role / Service</label>
+              <input type="text" id="contactRole" placeholder="e.g. Building Security, Neighborhood Watch" required>
+            </div>
+            <div class="form-group">
+              <label for="contactPhone">Phone Number</label>
+              <input type="tel" id="contactPhone" required>
+              <span class="form-error" id="contactPhoneError">Please enter a valid phone number.</span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Save Contact</button>
+          </form>
+        </div>
+
+        <!-- Saved community contacts get injected here by js/contacts.js -->
+        <div>
+          <h3 style="margin-bottom: var(--space-3);"><i class="fa-solid fa-address-book"></i> Saved Contacts</h3>
+          <div id="communityContactsList"></div>
+          <p id="noCommunityContacts" style="display:none;">No community contacts added yet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p style="color:#b7c0cc; max-width:none;">&copy; 2026 Community Disaster Preparedness and Emergency Information System. Student project — does not replace official emergency services.</p>
+      <p style="color:#b7c0cc; max-width:none;">In a real emergency, always call <strong>112</strong>.</p>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="sosModal">
+    <div class="modal-box">
+      <h2><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h2>
+      <p>This is a student project demo and does <strong>not</strong> automatically contact emergency services. Please use the numbers below to get real help.</p>
+      <div class="modal-actions">
+        <a href="tel:112" class="btn btn-danger btn-block">Call 112 (National Emergency Number)</a>
+        <a href="tel:108" class="btn btn-danger btn-block">Call 108 (Ambulance)</a>
+        <a href="contacts.html" class="btn btn-outline btn-block">View All Emergency Contacts</a>
+      </div>
+      <button class="modal-close" id="sosModalClose">Close</button>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2"></script>
+  <script src="js/contacts.js?v=2"></script>
+</body>
+</html>

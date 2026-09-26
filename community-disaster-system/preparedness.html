@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disaster Preparedness | Community Disaster Preparedness System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand" aria-label="Disaster Prep Home">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span class="navbar-brand-text">Disaster Prep</span>
+      </a>
+      <nav class="navbar-links" id="navbarLinks">
+        <a href="index.html">Home</a>
+        <a href="alerts.html">Emergency Alerts</a>
+        <a href="preparedness.html" class="active">Disaster Preparedness</a>
+        <a href="contacts.html">Emergency Contacts</a>
+        <a href="resources.html">Emergency Resources</a>
+        <a href="report.html">Report Emergency</a>
+        <a href="safety-guides.html">Safety Guides</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="sos-btn" id="sosBtn">
+          <span class="sos-full">SOS / Emergency</span>
+          <span class="sos-short">SOS</span>
+        </button>
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>Disaster Preparedness</h2>
+      <p class="section-intro">Click a disaster type to expand its preparedness checklist. Knowing what to do before disaster strikes is the single best way to stay safe.</p>
+
+      <div id="accordionContainer">
+
+        <!-- FLOOD -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span><i class="fa-solid fa-water" style="color:var(--color-primary); margin-right:8px;"></i>Flood Preparedness</span>
+            <i class="fa-solid fa-chevron-down chevron"></i>
+          </div>
+          <div class="accordion-content">
+            <ul>
+              <li>Move to higher ground</li>
+              <li>Keep emergency supplies ready</li>
+              <li>Avoid walking or driving through floodwater</li>
+              <li>Switch off electricity if instructed</li>
+              <li>Follow official emergency alerts</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- EARTHQUAKE -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span><i class="fa-solid fa-house-crack" style="color:var(--color-primary); margin-right:8px;"></i>Earthquake Preparedness</span>
+            <i class="fa-solid fa-chevron-down chevron"></i>
+          </div>
+          <div class="accordion-content">
+            <ul>
+              <li>Drop, Cover, and Hold On</li>
+              <li>Stay away from windows</li>
+              <li>Do not use elevators</li>
+              <li>Keep an emergency kit</li>
+              <li>Identify safe places in your home</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FIRE -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span><i class="fa-solid fa-fire" style="color:var(--color-primary); margin-right:8px;"></i>Fire Preparedness</span>
+            <i class="fa-solid fa-chevron-down chevron"></i>
+          </div>
+          <div class="accordion-content">
+            <ul>
+              <li>Know emergency exits</li>
+              <li>Keep fire extinguishers ready</li>
+              <li>Do not use elevators during a fire</li>
+              <li>Stay low in smoke</li>
+              <li>Call emergency services</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CYCLONE / SEVERE WEATHER -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span><i class="fa-solid fa-wind" style="color:var(--color-primary); margin-right:8px;"></i>Cyclone / Severe Weather Preparedness</span>
+            <i class="fa-solid fa-chevron-down chevron"></i>
+          </div>
+          <div class="accordion-content">
+            <ul>
+              <li>Stay indoors</li>
+              <li>Secure doors and windows</li>
+              <li>Keep food, water, and medicines ready</li>
+              <li>Charge phones and power banks</li>
+              <li>Follow weather warnings</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LANDSLIDE -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span><i class="fa-solid fa-mountain" style="color:var(--color-primary); margin-right:8px;"></i>Landslide Preparedness</span>
+            <i class="fa-solid fa-chevron-down chevron"></i>
+          </div>
+          <div class="accordion-content">
+            <ul>
+              <li>Avoid dangerous slopes during heavy rainfall</li>
+              <li>Stay alert for unusual sounds</li>
+              <li>Move away from affected areas</li>
+              <li>Follow evacuation instructions</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p style="color:#b7c0cc; max-width:none;">&copy; 2026 Community Disaster Preparedness and Emergency Information System. Student project — does not replace official emergency services.</p>
+      <p style="color:#b7c0cc; max-width:none;">In a real emergency, always call <strong>112</strong>.</p>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="sosModal">
+    <div class="modal-box">
+      <h2><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h2>
+      <p>This is a student project demo and does <strong>not</strong> automatically contact emergency services. Please use the numbers below to get real help.</p>
+      <div class="modal-actions">
+        <a href="tel:112" class="btn btn-danger btn-block">Call 112 (National Emergency Number)</a>
+        <a href="tel:108" class="btn btn-danger btn-block">Call 108 (Ambulance)</a>
+        <a href="contacts.html" class="btn btn-outline btn-block">View All Emergency Contacts</a>
+      </div>
+      <button class="modal-close" id="sosModalClose">Close</button>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>

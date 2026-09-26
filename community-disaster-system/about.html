@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Community Disaster Preparedness System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand" aria-label="Disaster Prep Home">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span class="navbar-brand-text">Disaster Prep</span>
+      </a>
+      <nav class="navbar-links" id="navbarLinks">
+        <a href="index.html">Home</a>
+        <a href="alerts.html">Emergency Alerts</a>
+        <a href="preparedness.html">Disaster Preparedness</a>
+        <a href="contacts.html">Emergency Contacts</a>
+        <a href="resources.html">Emergency Resources</a>
+        <a href="report.html">Report Emergency</a>
+        <a href="safety-guides.html">Safety Guides</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="sos-btn" id="sosBtn">
+          <span class="sos-full">SOS / Emergency</span>
+          <span class="sos-short">SOS</span>
+        </button>
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <h2>Community Disaster Preparedness and Emergency Information System</h2>
+
+      <h3>Project Objective</h3>
+      <p>To create a digital platform that helps communities access disaster preparedness information, emergency contacts, safety guidelines, and emergency resources in one place.</p>
+
+      <h3 style="margin-top: var(--space-5);">Problem Statement</h3>
+      <p>During disasters, people often struggle to find reliable, organized information quickly — scattered contact numbers, unclear safety steps, and no single place to check alerts or report an emergency. This gap costs valuable time when it matters most.</p>
+
+      <h3 style="margin-top: var(--space-5);">Proposed Solution</h3>
+      <p>A single, easy-to-navigate website that brings together emergency alerts, preparedness guides, verified contact numbers, nearby resources, and a simple way to report an incident — usable on any device, even with a basic internet connection.</p>
+
+      <h3 style="margin-top: var(--space-5);">Key Features</h3>
+      <ul style="padding-left: var(--space-4); color: var(--color-muted);">
+        <li style="list-style:disc; margin-bottom:8px;">Real-time-style emergency alerts with severity levels and filters</li>
+        <li style="list-style:disc; margin-bottom:8px;">Disaster preparedness guides for flood, earthquake, fire, cyclone, and landslide</li>
+        <li style="list-style:disc; margin-bottom:8px;">One-tap emergency contact calling</li>
+        <li style="list-style:disc; margin-bottom:8px;">Map-based emergency resource finder</li>
+        <li style="list-style:disc; margin-bottom:8px;">Emergency reporting form with a trackable Report ID</li>
+        <li style="list-style:disc; margin-bottom:8px;">Interactive emergency kit checklist</li>
+        <li style="list-style:disc;">Admin demo panel for managing community reports</li>
+      </ul>
+
+      <h3 style="margin-top: var(--space-5);">Target Users</h3>
+      <p>Residents of a community or neighborhood, local disaster management volunteers, and community organizers who need quick access to preparedness information during normal times and emergencies alike.</p>
+
+      <h3 style="margin-top: var(--space-5);">Technology Used</h3>
+      <p>HTML, CSS, and JavaScript for the frontend; Tailwind-style utility patterns and custom CSS for styling; Leaflet.js with OpenStreetMap for maps; Font Awesome for icons; and browser LocalStorage for saving reports, contacts, and checklist progress without needing a server.</p>
+
+      <h3 style="margin-top: var(--space-5);">Future Enhancements</h3>
+      <ul style="padding-left: var(--space-4); color: var(--color-muted);">
+        <li style="list-style:disc; margin-bottom:8px;">Real-time weather alerts</li>
+        <li style="list-style:disc; margin-bottom:8px;">Government disaster alert API integration</li>
+        <li style="list-style:disc; margin-bottom:8px;">GPS-based nearby emergency resource detection</li>
+        <li style="list-style:disc; margin-bottom:8px;">SMS notifications</li>
+        <li style="list-style:disc; margin-bottom:8px;">User authentication</li>
+        <li style="list-style:disc; margin-bottom:8px;">Cloud database (Firebase or Supabase)</li>
+        <li style="list-style:disc; margin-bottom:8px;">AI-based disaster information assistant</li>
+        <li style="list-style:disc;">Multi-language support, including Kannada and English</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p style="color:#b7c0cc; max-width:none;">&copy; 2026 Community Disaster Preparedness and Emergency Information System. Student project — does not replace official emergency services.</p>
+      <p style="color:#b7c0cc; max-width:none;">In a real emergency, always call <strong>112</strong>.</p>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="sosModal">
+    <div class="modal-box">
+      <h2><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h2>
+      <p>This is a student project demo and does <strong>not</strong> automatically contact emergency services. Please use the numbers below to get real help.</p>
+      <div class="modal-actions">
+        <a href="tel:112" class="btn btn-danger btn-block">Call 112 (National Emergency Number)</a>
+        <a href="tel:108" class="btn btn-danger btn-block">Call 108 (Ambulance)</a>
+        <a href="contacts.html" class="btn btn-outline btn-block">View All Emergency Contacts</a>
+      </div>
+      <button class="modal-close" id="sosModalClose">Close</button>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>

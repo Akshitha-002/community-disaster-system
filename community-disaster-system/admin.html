@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Demo Panel | Community Disaster Preparedness System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand" aria-label="Disaster Prep Home">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span class="navbar-brand-text">Disaster Prep</span>
+      </a>
+      <nav class="navbar-links" id="navbarLinks">
+        <a href="index.html">Home</a>
+        <a href="alerts.html">Emergency Alerts</a>
+        <a href="preparedness.html">Disaster Preparedness</a>
+        <a href="contacts.html">Emergency Contacts</a>
+        <a href="resources.html">Emergency Resources</a>
+        <a href="report.html">Report Emergency</a>
+        <a href="safety-guides.html">Safety Guides</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="sos-btn" id="sosBtn">
+          <span class="sos-full">SOS / Emergency</span>
+          <span class="sos-short">SOS</span>
+        </button>
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-note">
+        <i class="fa-solid fa-user-shield"></i>
+        <strong>Admin Demo Panel</strong> — this page has no real login. It's a frontend-only demonstration of how community organizers could manage incoming reports.
+      </div>
+
+      <h2>Community Dashboard</h2>
+
+      <div class="grid grid-4" style="margin-bottom: var(--space-6);">
+        <div class="card"><h3>Total Reports</h3><p id="statTotalReports" style="font-size:2rem; font-weight:700; color:var(--color-ink);">0</p></div>
+        <div class="card"><h3>Active Alerts</h3><p id="statActiveAlerts" style="font-size:2rem; font-weight:700; color:var(--color-ink);">3</p></div>
+        <div class="card"><h3>Available Resources</h3><p id="statResources" style="font-size:2rem; font-weight:700; color:var(--color-ink);">0</p></div>
+        <div class="card"><h3>Preparedness Guides</h3><p style="font-size:2rem; font-weight:700; color:var(--color-ink);">5</p></div>
+      </div>
+
+      <h2>Reports by Emergency Type</h2>
+      <div class="grid grid-4" id="reportsByTypeContainer" style="margin-bottom: var(--space-6);"></div>
+
+      <h2>Manage Emergency Reports</h2>
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Report ID</th>
+              <th>Type</th>
+              <th>Location</th>
+              <th>Severity</th>
+              <th>People Affected</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminReportsTableBody">
+            <!-- Rows injected by js/admin.js -->
+          </tbody>
+        </table>
+        <p id="noAdminReports" style="display:none; margin-top: var(--space-3);">No emergency reports submitted yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p style="color:#b7c0cc; max-width:none;">&copy; 2026 Community Disaster Preparedness and Emergency Information System. Student project — does not replace official emergency services.</p>
+      <p style="color:#b7c0cc; max-width:none;">In a real emergency, always call <strong>112</strong>.</p>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="sosModal">
+    <div class="modal-box">
+      <h2><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h2>
+      <p>This is a student project demo and does <strong>not</strong> automatically contact emergency services. Please use the numbers below to get real help.</p>
+      <div class="modal-actions">
+        <a href="tel:112" class="btn btn-danger btn-block">Call 112 (National Emergency Number)</a>
+        <a href="tel:108" class="btn btn-danger btn-block">Call 108 (Ambulance)</a>
+        <a href="contacts.html" class="btn btn-outline btn-block">View All Emergency Contacts</a>
+      </div>
+      <button class="modal-close" id="sosModalClose">Close</button>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2"></script>
+  <script src="js/admin.js?v=2"></script>
+</body>
+</html>

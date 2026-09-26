@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report Emergency | Community Disaster Preparedness System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand" aria-label="Disaster Prep Home">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span class="navbar-brand-text">Disaster Prep</span>
+      </a>
+      <nav class="navbar-links" id="navbarLinks">
+        <a href="index.html">Home</a>
+        <a href="alerts.html">Emergency Alerts</a>
+        <a href="preparedness.html">Disaster Preparedness</a>
+        <a href="contacts.html">Emergency Contacts</a>
+        <a href="resources.html">Emergency Resources</a>
+        <a href="report.html" class="active">Report Emergency</a>
+        <a href="safety-guides.html">Safety Guides</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="sos-btn" id="sosBtn">
+          <span class="sos-full">SOS / Emergency</span>
+          <span class="sos-short">SOS</span>
+        </button>
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container" style="max-width: 720px;">
+      <h2>Report Emergency</h2>
+
+      <div class="disclaimer-banner">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        This is a student project demo. Submitting this form does <strong>not</strong> notify real emergency services.
+        In an actual emergency, call <strong>112</strong> immediately.
+      </div>
+
+      <form id="reportForm">
+        <div class="form-group">
+          <label for="reportName">Name</label>
+          <input type="text" id="reportName" required>
+          <span class="form-error" id="reportNameError">Please enter your name.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reportPhone">Phone Number</label>
+          <input type="tel" id="reportPhone" required>
+          <span class="form-error" id="reportPhoneError">Please enter a valid phone number.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reportType">Emergency Type</label>
+          <select id="reportType" required>
+            <option value="">Select emergency type</option>
+            <option value="Flood">Flood</option>
+            <option value="Fire">Fire</option>
+            <option value="Earthquake">Earthquake</option>
+            <option value="Medical Emergency">Medical Emergency</option>
+            <option value="Accident">Accident</option>
+            <option value="Landslide">Landslide</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="form-error" id="reportTypeError">Please select an emergency type.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reportLocation">Location</label>
+          <input type="text" id="reportLocation" placeholder="e.g. street, area, landmark" required>
+          <span class="form-error" id="reportLocationError">Please enter the location.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reportDescription">Description of Emergency</label>
+          <textarea id="reportDescription" required></textarea>
+          <span class="form-error" id="reportDescriptionError">Please describe the emergency.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reportSeverity">Severity</label>
+          <select id="reportSeverity" required>
+            <option value="">Select severity</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
+          <span class="form-error" id="reportSeverityError">Please select a severity level.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="reportAffected">Number of People Affected</label>
+          <input type="number" id="reportAffected" min="0" required>
+          <span class="form-error" id="reportAffectedError">Please enter the number of people affected.</span>
+        </div>
+
+        <div class="form-group form-checkbox">
+          <input type="checkbox" id="reportConfirm" required>
+          <label for="reportConfirm" style="font-weight:400;">I confirm that the information provided is correct.</label>
+        </div>
+        <span class="form-error" id="reportConfirmError">You must confirm the information is correct before submitting.</span>
+
+        <button type="submit" class="btn btn-danger btn-block" style="margin-top: var(--space-3);">Submit Emergency Report</button>
+      </form>
+
+      <!-- Shown by js/report.js after a successful submission -->
+      <div class="card" id="reportSuccess" style="display:none; margin-top: var(--space-4); border-left: 6px solid var(--color-severity-low);">
+        <h3><i class="fa-solid fa-circle-check" style="color:var(--color-severity-low);"></i> Report Submitted</h3>
+        <p>Your report has been recorded. Your Report ID is:</p>
+        <p id="reportIdDisplay" style="font-size:1.4rem; font-weight:700; color:var(--color-ink);"></p>
+        <p>Remember: for real emergencies, always call <strong>112</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent reports, so the reporter can see it was added to the community dashboard -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Recent Community Reports</h2>
+      <div id="recentReportsContainer"></div>
+      <p id="noRecentReports" style="display:none;">No reports submitted yet.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p style="color:#b7c0cc; max-width:none;">&copy; 2026 Community Disaster Preparedness and Emergency Information System. Student project — does not replace official emergency services.</p>
+      <p style="color:#b7c0cc; max-width:none;">In a real emergency, always call <strong>112</strong>.</p>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="sosModal">
+    <div class="modal-box">
+      <h2><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h2>
+      <p>This is a student project demo and does <strong>not</strong> automatically contact emergency services. Please use the numbers below to get real help.</p>
+      <div class="modal-actions">
+        <a href="tel:112" class="btn btn-danger btn-block">Call 112 (National Emergency Number)</a>
+        <a href="tel:108" class="btn btn-danger btn-block">Call 108 (Ambulance)</a>
+        <a href="contacts.html" class="btn btn-outline btn-block">View All Emergency Contacts</a>
+      </div>
+      <button class="modal-close" id="sosModalClose">Close</button>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2"></script>
+  <script src="js/report.js?v=2"></script>
+</body>
+</html>

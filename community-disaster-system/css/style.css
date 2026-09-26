@@ -1,0 +1,887 @@
+/* =====================================================================
+   COMMUNITY DISASTER PREPAREDNESS AND EMERGENCY INFORMATION SYSTEM
+   Main Stylesheet
+   ---------------------------------------------------------------------
+   This file is organized into sections. Use Ctrl+F / Cmd+F to jump to:
+   1. CSS Variables (design tokens)
+   2. Reset & Base Styles
+   3. Typography
+   4. Layout Helpers
+   5. Navigation Bar
+   6. Buttons
+   7. Hero Section
+   8. Cards (general + emergency status + alert + resource)
+   9. Severity Badges
+   10. Accordion (Preparedness page)
+   11. Forms
+   12. Emergency Kit Checklist
+   13. SOS Modal
+   14. Admin Table
+   15. Footer
+   16. Responsive Rules (mobile / tablet)
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. CSS VARIABLES
+   These are our "design tokens" -- change a value here and it updates
+   everywhere the variable is used. This keeps the whole site consistent.
+--------------------------------------------------------------------- */
+:root {
+  /* --- Core colors --- */
+  --color-ink: #10151f;          /* near-black navy, used for headings/text */
+  --color-bg: #f3f5f8;           /* page background, cool light gray */
+  --color-surface: #ffffff;      /* card / panel background */
+  --color-border: #d8dee6;       /* hairline borders */
+  --color-muted: #5b6472;        /* secondary text */
+
+  /* --- Brand / structural color --- */
+  --color-primary: #1b3a5c;      /* deep steel blue - navbar, headings, links */
+  --color-primary-dark: #122740;
+  --color-primary-light: #e8eef4;
+
+  /* --- Emergency action color --- */
+  --color-sos: #c81e3a;          /* SOS button / critical actions */
+  --color-sos-dark: #9c1730;
+
+  /* --- Severity scale (used consistently for alerts + reports) --- */
+  --color-severity-low: #1f7a4d;      /* green */
+  --color-severity-medium: #e08e1d;   /* amber */
+  --color-severity-high: #d94e1f;     /* orange-red */
+  --color-severity-critical: #8b0000; /* dark red */
+
+  /* --- Typography --- */
+  --font-heading: "Archivo", "Segoe UI", Arial, sans-serif;
+  --font-body: "Inter", "Segoe UI", Arial, sans-serif;
+
+  /* --- Spacing scale --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+
+  /* --- Radius & shadow (kept subtle - this is a utility site, not a showcase) --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --shadow-card: 0 1px 3px rgba(16, 21, 31, 0.08);
+
+  /* --- Layout --- */
+  --max-width: 1180px;
+  --navbar-height: 72px;
+}
+
+
+/* ---------------------------------------------------------------------
+   2. RESET & BASE STYLES
+--------------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-bg);
+  line-height: 1.55;
+  /* padding-top makes room for the sticky navbar so content isn't hidden under it */
+  padding-top: var(--navbar-height);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Keyboard accessibility: always show a visible focus outline */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Respect users who have asked their OS to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ---------------------------------------------------------------------
+   3. TYPOGRAPHY
+--------------------------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: var(--space-3); }
+h3 { font-size: 1.25rem; margin-bottom: var(--space-2); }
+
+p {
+  color: var(--color-muted);
+  max-width: 70ch; /* keeps long paragraphs readable */
+}
+
+.section-intro {
+  max-width: 640px;
+  margin-bottom: var(--space-5);
+}
+
+/* Utility class for text that must stand out immediately (emergency numbers, warnings) */
+.text-critical {
+  color: var(--color-severity-critical);
+  font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------------------
+   4. LAYOUT HELPERS
+--------------------------------------------------------------------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.section {
+  padding: var(--space-6) 0;
+}
+
+.section-alt {
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* ---------------------------------------------------------------------
+   5. NAVIGATION BAR
+--------------------------------------------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 1000;
+}
+
+.navbar .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.navbar-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  /* Never let the logo shrink or wrap onto a second line -
+     it should always stay as one solid unit next to the icon. */
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.navbar-brand-text {
+  color: var(--color-primary);
+}
+
+/* The middle zone: the 8 page links. This is the ONLY part of the
+   navbar allowed to disappear behind the hamburger menu - the logo
+   on the left and the SOS/hamburger group on the right are their
+   own separate flex items (see .navbar-actions below) so they are
+   never pushed off-screen or cut off, at any window width. */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  white-space: nowrap;
+}
+
+.navbar-links a {
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: var(--space-2) 0;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  border-bottom-color: var(--color-primary);
+}
+
+/* The right-hand zone: SOS button + hamburger toggle, grouped together
+   so they always sit fully on-screen regardless of how much room the
+   link list has. */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+/* The SOS button in the navbar - always visible, always red */
+.sos-btn {
+  background-color: var(--color-sos);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sos-btn:hover {
+  background-color: var(--color-sos-dark);
+}
+
+/* On full-size screens show the full label; the short "SOS" version
+   (see the media query near the bottom of this file) only appears on
+   very small phone screens where "SOS / Emergency" wouldn't fit. */
+.sos-btn .sos-short {
+  display: none;
+}
+
+/* Hamburger menu button - hidden until the navbar-links media query
+   below hides the inline link list (see section 16) */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+  flex-shrink: 0;
+}
+
+.navbar-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-ink);
+}
+
+
+/* ---------------------------------------------------------------------
+   6. BUTTONS
+--------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+.btn-primary:hover { background-color: var(--color-primary-dark); }
+
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: var(--color-sos);
+  color: #fff;
+}
+.btn-danger:hover { background-color: var(--color-sos-dark); }
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* Used for "Call Now" links styled as buttons */
+.btn-call {
+  background-color: var(--color-severity-low);
+  color: #fff;
+}
+.btn-call:hover { filter: brightness(0.9); }
+
+
+/* ---------------------------------------------------------------------
+   7. HERO SECTION (Home page)
+--------------------------------------------------------------------- */
+.hero {
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: var(--space-7) 0;
+}
+
+.hero h1 {
+  color: #fff;
+  max-width: 16ch;
+}
+
+.hero p {
+  color: #dbe4ee;
+  font-size: 1.1rem;
+  margin: var(--space-3) 0 var(--space-4);
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* On a dark hero, the outline button needs a light border instead of the primary color */
+.hero .btn-outline {
+  border-color: #fff;
+  color: #fff;
+}
+.hero .btn-outline:hover {
+  background-color: #fff;
+  color: var(--color-primary);
+}
+
+/* Row of small disaster-type icons under the hero */
+.hazard-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.hazard-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.85rem;
+  color: #dbe4ee;
+}
+
+.hazard-icon i {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+
+/* ---------------------------------------------------------------------
+   8. CARDS
+--------------------------------------------------------------------- */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-card);
+}
+
+.card h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.card h3 i {
+  color: var(--color-primary);
+}
+
+/* Emergency Status cards on the home page */
+.status-card {
+  text-align: left;
+}
+
+.status-card .btn {
+  margin-top: var(--space-3);
+}
+
+/* Alert card - includes a colored left border matching its severity */
+.alert-card {
+  border-left: 6px solid var(--color-severity-medium);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.alert-card[data-severity="low"] { border-left-color: var(--color-severity-low); }
+.alert-card[data-severity="medium"] { border-left-color: var(--color-severity-medium); }
+.alert-card[data-severity="high"] { border-left-color: var(--color-severity-high); }
+.alert-card[data-severity="critical"] { border-left-color: var(--color-severity-critical); }
+
+.alert-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.alert-meta {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin: var(--space-2) 0;
+}
+
+/* Resource card (hospitals, shelters, etc.) */
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.resource-category-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  width: fit-content;
+}
+
+
+/* ---------------------------------------------------------------------
+   9. SEVERITY BADGES
+   Used on alert cards and in the report form/admin panel.
+--------------------------------------------------------------------- */
+.badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px var(--space-2);
+  border-radius: var(--radius-sm);
+  color: #fff;
+}
+
+.badge-low { background-color: var(--color-severity-low); }
+.badge-medium { background-color: var(--color-severity-medium); }
+.badge-high { background-color: var(--color-severity-high); }
+.badge-critical { background-color: var(--color-severity-critical); }
+
+/* Status badges used in the admin panel (New / Under Review / Resolved) */
+.status-new { background-color: var(--color-sos); }
+.status-under-review { background-color: var(--color-severity-medium); }
+.status-resolved { background-color: var(--color-severity-low); }
+
+
+/* ---------------------------------------------------------------------
+   10. ACCORDION (Disaster Preparedness page)
+--------------------------------------------------------------------- */
+.accordion-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+  background-color: var(--color-surface);
+  overflow: hidden;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.accordion-header i.chevron {
+  transition: transform 0.15s ease;
+}
+
+/* When JS adds the "open" class, rotate the chevron and reveal the content */
+.accordion-item.open .chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+  padding: 0 var(--space-4);
+}
+
+.accordion-item.open .accordion-content {
+  padding: 0 var(--space-4) var(--space-4);
+  /* max-height is set inline by JS to the content's real height */
+}
+
+.accordion-content ul {
+  padding-left: var(--space-4);
+}
+
+.accordion-content li {
+  list-style: disc;
+  margin-bottom: var(--space-2);
+  color: var(--color-ink);
+}
+
+
+/* ---------------------------------------------------------------------
+   11. FORMS
+--------------------------------------------------------------------- */
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: var(--space-3);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: #fff;
+  color: var(--color-ink);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.form-checkbox input {
+  margin-top: 4px;
+}
+
+.form-error {
+  color: var(--color-severity-critical);
+  font-size: 0.85rem;
+  margin-top: var(--space-1);
+  display: none; /* JS toggles this to "block" when a field fails validation */
+}
+
+.form-error.visible {
+  display: block;
+}
+
+.form-note {
+  background-color: var(--color-primary-light);
+  border-left: 4px solid var(--color-primary);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+  color: var(--color-ink);
+}
+
+/* The "does NOT replace official emergency services" notice on the report page */
+.disclaimer-banner {
+  background-color: #fdecea;
+  border-left: 4px solid var(--color-severity-critical);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+
+/* ---------------------------------------------------------------------
+   12. EMERGENCY KIT CHECKLIST (Safety Guides page)
+--------------------------------------------------------------------- */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.checklist-item input {
+  width: 20px;
+  height: 20px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 12px;
+  background-color: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: var(--space-2) 0 var(--space-4);
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--color-severity-low);
+  /* width is set by JS based on how many items are checked */
+  transition: width 0.2s ease;
+}
+
+
+/* ---------------------------------------------------------------------
+   13. SOS MODAL
+--------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(16, 21, 31, 0.6);
+  display: none; /* JS switches this to "flex" to show the modal */
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: var(--space-3);
+}
+
+.modal-overlay.visible {
+  display: flex;
+}
+
+.modal-box {
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  max-width: 420px;
+  width: 100%;
+}
+
+.modal-box h2 {
+  color: var(--color-sos);
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: var(--space-3);
+}
+
+
+/* ---------------------------------------------------------------------
+   14. ADMIN TABLE
+--------------------------------------------------------------------- */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+.admin-table th {
+  background-color: var(--color-primary-light);
+  font-family: var(--font-heading);
+}
+
+.admin-table select {
+  padding: var(--space-1) var(--space-2);
+}
+
+
+/* ---------------------------------------------------------------------
+   15. FOOTER
+--------------------------------------------------------------------- */
+.footer {
+  background-color: var(--color-ink);
+  color: #b7c0cc;
+  padding: var(--space-5) 0;
+  margin-top: var(--space-6);
+}
+
+.footer a {
+  color: #fff;
+}
+
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+
+/* ---------------------------------------------------------------------
+   16. RESPONSIVE RULES
+--------------------------------------------------------------------- */
+
+/* Tablet and below: collapse the 4-column grids to 2 columns */
+@media (max-width: 900px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Hamburger menu replaces the horizontal nav links.
+   With a logo, 8 page links, an SOS button, and a hamburger icon all
+   competing for space, they realistically only all fit inline on
+   quite wide desktop monitors. 1300px covers most laptops as well as
+   phones and tablets, so the menu reliably collapses instead of
+   overflowing or squeezing on typical screens. */
+@media (max-width: 1300px) {
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-2) 0;
+    display: none; /* JS toggles this to "flex" when the hamburger is tapped */
+    max-height: calc(100vh - var(--navbar-height));
+    overflow-y: auto;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+/* Very small phones: drop the logo's text (the shield icon alone
+   still marks it as "Home") and shrink the SOS button down to just
+   "SOS" so the whole action group comfortably fits next to the
+   hamburger icon. */
+@media (max-width: 420px) {
+  .navbar-brand-text {
+    display: none;
+  }
+
+  .sos-btn .sos-full {
+    display: none;
+  }
+
+  .sos-btn .sos-short {
+    display: inline;
+  }
+
+  .sos-btn {
+    padding: var(--space-2) var(--space-3);
+  }
+}
+
+@media (max-width: 700px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .footer .container {
+    flex-direction: column;
+  }
+}

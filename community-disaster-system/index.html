@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Disaster Preparedness and Emergency Information System</title>
+
+  <!-- Google Fonts: Archivo for headings, Inter for body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Our own stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <!-- =====================================================
+       NAVIGATION BAR
+       (This same block is copied at the top of every page,
+       with the "active" class moved to whichever link matches
+       the current page.)
+  ====================================================== -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand" aria-label="Disaster Prep Home">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span class="navbar-brand-text">Disaster Prep</span>
+      </a>
+
+      <nav class="navbar-links" id="navbarLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="alerts.html">Emergency Alerts</a>
+        <a href="preparedness.html">Disaster Preparedness</a>
+        <a href="contacts.html">Emergency Contacts</a>
+        <a href="resources.html">Emergency Resources</a>
+        <a href="report.html">Report Emergency</a>
+        <a href="safety-guides.html">Safety Guides</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="sos-btn" id="sosBtn">
+          <span class="sos-full">SOS / Emergency</span>
+          <span class="sos-short">SOS</span>
+        </button>
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- =====================================================
+       HERO SECTION
+  ====================================================== -->
+  <section class="hero">
+    <div class="container">
+      <h1>Be Prepared Before Disaster Strikes</h1>
+      <p>Get emergency alerts, learn how to prepare, find important contacts and resources, and help your community stay safe.</p>
+
+      <div class="hero-actions">
+        <a href="alerts.html" class="btn btn-primary" style="background-color:#fff; color:var(--color-primary);">View Emergency Alerts</a>
+        <a href="preparedness.html" class="btn btn-outline">Learn How to Prepare</a>
+      </div>
+
+      <!-- Row of disaster-type icons -->
+      <div class="hazard-icons">
+        <div class="hazard-icon"><i class="fa-solid fa-water"></i>Flood</div>
+        <div class="hazard-icon"><i class="fa-solid fa-fire"></i>Fire</div>
+        <div class="hazard-icon"><i class="fa-solid fa-house-crack"></i>Earthquake</div>
+        <div class="hazard-icon"><i class="fa-solid fa-wind"></i>Cyclone</div>
+        <div class="hazard-icon"><i class="fa-solid fa-mountain"></i>Landslide</div>
+        <div class="hazard-icon"><i class="fa-solid fa-truck-medical"></i>Medical Emergency</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       EMERGENCY STATUS SECTION
+  ====================================================== -->
+  <section class="section">
+    <div class="container">
+      <h2>Emergency Status</h2>
+      <p class="section-intro">Everything you need in one place — jump straight to what matters right now.</p>
+
+      <div class="grid grid-4">
+        <div class="card status-card">
+          <h3><i class="fa-solid fa-triangle-exclamation"></i>Current Alerts</h3>
+          <p>See active alerts for your area, filtered by disaster type and severity.</p>
+          <a href="alerts.html" class="btn btn-outline">View Alerts</a>
+        </div>
+
+        <div class="card status-card">
+          <h3><i class="fa-solid fa-phone"></i>Emergency Contacts</h3>
+          <p>Police, fire, ambulance, and helpline numbers, ready to call in one tap.</p>
+          <a href="contacts.html" class="btn btn-outline">View Contacts</a>
+        </div>
+
+        <div class="card status-card">
+          <h3><i class="fa-solid fa-book"></i>Safety Guides</h3>
+          <p>What to do before, during, and after a disaster, plus an emergency kit checklist.</p>
+          <a href="safety-guides.html" class="btn btn-outline">View Guides</a>
+        </div>
+
+        <div class="card status-card">
+          <h3><i class="fa-solid fa-map-location-dot"></i>Emergency Resources</h3>
+          <p>Find nearby hospitals, shelters, police stations, and relief centers on a map.</p>
+          <a href="resources.html" class="btn btn-outline">View Resources</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <p style="color:#b7c0cc; max-width:none;">&copy; 2026 Community Disaster Preparedness and Emergency Information System. Student project — does not replace official emergency services.</p>
+      <p style="color:#b7c0cc; max-width:none;">In a real emergency, always call <strong>112</strong>.</p>
+    </div>
+  </footer>
+
+
+  <!-- =====================================================
+       SOS CONFIRMATION MODAL
+       (Same modal markup appears on every page so the SOS
+       button works site-wide. main.js wires up the behavior.)
+  ====================================================== -->
+  <div class="modal-overlay" id="sosModal">
+    <div class="modal-box">
+      <h2><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h2>
+      <p>This is a student project demo and does <strong>not</strong> automatically contact emergency services. Please use the numbers below to get real help.</p>
+
+      <div class="modal-actions">
+        <a href="tel:112" class="btn btn-danger btn-block">Call 112 (National Emergency Number)</a>
+        <a href="tel:108" class="btn btn-danger btn-block">Call 108 (Ambulance)</a>
+        <a href="contacts.html" class="btn btn-outline btn-block">View All Emergency Contacts</a>
+      </div>
+
+      <button class="modal-close" id="sosModalClose">Close</button>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>
