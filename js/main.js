@@ -127,4 +127,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+
+  /* -------------------------------------------------------------
+     4. OFFLINE SUPPORT
+     (a) Register the service worker (sw.js) so the browser saves the
+         whole site and can open it with no internet.
+     (b) Show a small banner at the top whenever the device is offline,
+         so people know they're seeing saved content.
+     Service workers only run on https:// or localhost, so the
+     registration is skipped when the page is opened as a plain file.
+  ------------------------------------------------------------- */
+  if ("serviceWorker" in navigator && (window.location.protocol === "https:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+    navigator.serviceWorker.register("sw.js").catch(function (error) {
+      console.warn("Offline mode could not be enabled:", error);
+    });
+  }
+
+  var offlineBanner = document.createElement("div");
+  offlineBanner.className = "offline-banner";
+  offlineBanner.setAttribute("role", "status");
+  offlineBanner.innerHTML = '<i class="fa-solid fa-wifi"></i> You are offline. Showing saved content - map tiles and directions need internet.';
+  document.body.appendChild(offlineBanner);
+
+  function updateOnlineStatus() {
+    offlineBanner.classList.toggle("visible", !navigator.onLine);
+  }
+  window.addEventListener("online", updateOnlineStatus);
+  window.addEventListener("offline", updateOnlineStatus);
+  updateOnlineStatus();
+
 });

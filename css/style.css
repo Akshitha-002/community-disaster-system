@@ -1114,3 +1114,42 @@ textarea:focus {
     flex-direction: column;
   }
 }
+
+
+/* ---------------------------------------------------------------------
+   17. OFFLINE BANNER + MAP NOTICE
+   The banner is added by main.js and only shown while the device has
+   no internet connection.
+--------------------------------------------------------------------- */
+.offline-banner {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1500;
+  background-color: var(--color-ink);
+  color: #fff;
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.offline-banner.visible {
+  display: block;
+}
+
+.map-notice {
+  background-color: #fff7e6;
+  border-left: 4px solid var(--color-severity-medium);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-3);
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  display: none;
+}
+
+.map-notice.visible {
+  display: block;
+}

@@ -108,17 +108,46 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Shows or hides the "map needs internet" notice above the map.
+function showMapNotice(show) {
+  var notice = document.getElementById("mapNotice");
+  if (notice) notice.classList.toggle("visible", show);
+}
+
 // Sets up the Leaflet map, centered on Bengaluru, using free OpenStreetMap tiles.
 function initMap() {
   var mapElement = document.getElementById("resourceMap");
-  if (!mapElement || typeof L === "undefined") return; // Leaflet didn't load - skip safely
+  if (!mapElement) return;
+
+  // If the Leaflet library itself didn't load, skip the map but keep the
+  // resource list working, and tell the visitor why the map is missing.
+  if (typeof L === "undefined") {
+    showMapNotice(true);
+    return;
+  }
 
   resourceMap = L.map("resourceMap").setView([12.9716, 77.5946], 12);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  var tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
     maxZoom: 19
   }).addTo(resourceMap);
+
+  // Map pictures ("tiles") come from the internet. If some fail to load
+  // while the device is offline, show the notice. The service worker
+  // (sw.js) keeps tiles you've already viewed, so those still appear.
+  var failedTiles = 0;
+  tileLayer.on("loading", function () { failedTiles = 0; });
+  tileLayer.on("tileerror", function () { failedTiles++; });
+  tileLayer.on("load", function () {
+    showMapNotice(failedTiles > 0 && !navigator.onLine);
+  });
+
+  // When the connection comes back, hide the notice and reload the tiles.
+  window.addEventListener("online", function () {
+    showMapNotice(false);
+    tileLayer.redraw();
+  });
 }
 
 // --- GEOLOCATION ---
